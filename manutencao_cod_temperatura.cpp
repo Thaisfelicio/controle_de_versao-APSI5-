@@ -34,83 +34,102 @@ Registre quanto tempo você demorou para verificar se a alteração foi feita corre
 #include<iostream>
 using namespace std;
 
-float fparac(float Fc){
-    return (Fc-32) / 1.8;
+//função para converter Fahrenheit para celsius
+float fparac(float temperaturaFahrenheit){
+    return (temperaturaFahrenheit-32) / 1.8;
 }
 
-float fparak(float Fk){
-    return (Fk-32) /1.8 + 273;
+//função para converter Fahrenheit para kelvin
+float fparak(float temperaturaFahrenheit){
+    return (temperaturaFahrenheit-32) /1.8 + 273;
+}
+//função para converter celsius para Fahrenheit
+float cparaf(float temperaturaCelsius){	
+	return 32 + temperaturaCelsius *1.8;
+}
+//função para converter celsius para kelvin
+float cparak(float temperaturaCelsius){
+	return temperaturaCelsius +273;
+}
+//função para converter kelvin para celsius
+float kparac(float temperaturaKelvin){
+	return temperaturaKelvin - 273;
 }
 
-float cparaf(float Cf){	
-	return 32 + Cf *1.8;
+//função para converter kelvin para Fahrenheit
+float kparaf(float temperaturaKelvin){
+	return 32 + (temperaturaKelvin - 273) / 1.8;
 }
 
-float cparak(float Ck){
-	return Ck +273;
-}
-	
-float kparac(float Kc){
-	return Kc - 273;
-}
-
-float kparaf(float Kf){
-	return 32 + (Kf - 273) / 1.8;
+int menu(){
+	int comando;
+	while(comando < 1 || comando > 7){
+		cout<<"CONVERSOR DE TEMPERATURA\n";
+		cout << "\n 1 - Converter Fahrenheit para Celsius";
+        cout << "\n 2 - Converter Fahrenheit para Kelvin";
+        cout << "\n 3 - Converter Celsius para Fahrenheit";
+        cout << "\n 4 - Converter Celsius para Kelvin";
+        cout << "\n 5 - Converter Kelvin para Celsius";
+        cout << "\n 6 - Converter Kelvin Fahrenheit";
+        cout << "\n 7 - SAIR" << endl;
+        
+        cout << "\n - DIGITE UM COMANDO: \n\n"<< endl;
+        cin >> comando;	
+        
+        if(comando < 1 || comando > 7){
+        	cout<<"Comando invalido, tente novamente."<<endl;
+		}
+	}
+	return comando;
 }
 
 int main()
-{
-	int comando;
+{		
+	float temperatura;
+	menu();
+	int escolha;
+	escolha = menu();
+	do{
 	
-	float Fc, Fk, Cf, Ck, Kc, Kf, temperatura;
-	
-	while(comando != 7)	{	
-        cout << "\n * 1 - F --> C";
-        cout << "\n * 2 - F --> K";
-        cout << "\n * 3 - C --> F";
-        cout << "\n * 4 - C --> K";
-        cout << "\n * 5 - K --> C";
-        cout << "\n * 6 - K --> F";
-        cout << "\n * 7 - SAIR" << endl;
-        
-        cout << "\n - SELECIONE UMA COMANDO - \n\n"<< endl;
-        cin >> comando;	
-
-        cout << "\nTEMPERATURA: "<< endl;
-        
-        switch(comando){
+        switch(escolha){
             case 1:
-                cin >> Fc;
-                cout << "\n\nTEMPERATURA EM CELSIUS: %.2f C" << fparac(Fc) << endl;
+            	cout<<"Digite a temperatura em fahrenheit: ";
+                cin >> temperatura;
+                cout << "\n\nTEMPERATURA EM CELSIUS: " << fparac(temperatura) << endl;
             break;
 
             case 2:
-                cin >> Fk;
-                cout << "\n\nTEMPERATURA EM KELVIN: %.2f K" << fparak(Fk) << endl;
+            	cout<<"Digite a temperatura em fahrenheit: ";
+                cin >> temperatura;
+                cout << "\n\nTEMPERATURA EM KELVIN: " << fparak(temperatura) << endl;
             break;
 
             case 3:
-                cin >> Cf;
-                cout << "\n\nTEMPERATURA EM FAHRENHEIT: %.2f F" << cparaf(Cf) << endl;
+            	cout<<"Digite a temperatura em celsius: ";
+                cin >> temperatura;
+                cout << "\n\nTEMPERATURA EM FAHRENHEIT: " << cparaf(temperatura) << endl;
             break;
 
             case 4:
-				cin >> Fk;
-                cout << "\n\nTEMPERATURA EM KELVIN: %.2f K" << cparak(Ck) << endl;
+            	cout<<"Digite a temperatura em celsius: ";
+				cin >> temperatura;
+                cout << "\n\nTEMPERATURA EM KELVIN: " << cparak(temperatura) << endl;
             break;
 
             case 5:
-                cin >> Kc;
-                cout << cout << "\n\nTEMPERATURA EM CELSIUS: %.2f C" << kparac(Kc) << endl;
+            	cout<<"Digite a temperatura em kelvin: ";
+                cin >> temperatura;
+                cout << cout << "\n\nTEMPERATURA EM CELSIUS: " << kparac(temperatura) << endl;
             break;
 
             case 6:
-                cin >> Kf;
-                cout << "\n\nTEMPERATURA EM FAHRENHEIT: %.2f F" << kparaf(Kf) << endl;
+            	cout<<"Digite a temperatura em kelvin: ";
+                cin >> temperatura;
+                cout << "\n\nTEMPERATURA EM FAHRENHEIT: " << kparaf(temperatura) << endl;
             break;
 
             default:
                 cout << "\n\nSaindo...";
         }
-	}
+	}while(escolha < 1 || escolha > 7);
 }
